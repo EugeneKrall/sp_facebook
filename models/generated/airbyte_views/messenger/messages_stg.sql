@@ -9,20 +9,26 @@
 -- depends_on: {{ ref('messages_ab2') }}
 select
     {{ dbt_utils.surrogate_key([
-        'id',
         '_id',
         'type',
+        'price',
         'bot_id',
-        boolean_to_string('is_bot'),
-        'opened',
-        'sent_at',
+        'status',
+         boolean_to_string('is_paid'),
         'user_id',
-        'direction',
-        'messenger',
-        'contact_id',
         'campaign_id',
+        'currency',
+        'direction',
+        'contact_id',
+        'created_at',
+        'updated_at',
+        'price_country_code',
+        'id',
+        boolean_to_string('is_bot'),
+        'opened_at',
+        'sent_at',
         'delivered_at',
-        'campaign_contact',
+        'campaign_contact_id'
     ]) }} as _airbyte_messages_hashid,
     tmp.*
 from {{ ref('messages_ab2') }} tmp
